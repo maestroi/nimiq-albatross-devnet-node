@@ -1,5 +1,6 @@
-export TAG=1.0.3
+#!/bin/bash 
 
+export TAG=1.0.3
 
 function requirements() {
     sudo apt-get update -y && sudo apt-get install ca-certificates curl gnupg lsb-release -y
@@ -16,15 +17,22 @@ function install_compose() {
     sudo chmod +x /usr/local/bin/docker-compose
 }
 
+function start_node(){
+    echo "Starting node..."
+    docker-compose config
+    docker-compose -f docker-compose.yml up -d
+    echo "Follow node with: docker-compose logs -f nimiq-node"
+    docker-compose logs -f nimiq-node
+}
+
 
 if [ -x "$(command -v docker)" ]; then
-    echo "Docker is installed!"
-    docker-compose config
-    docker-compose up -d
+    start_node
 else
-    echo "Install docker..."
-    requirements()
-    install_docker()
-    install_compose()
-    echo " installing docker done!"
+    echo "Docker not installed, Installing docker..."
+    requirements
+    install_docker
+    install_compose
+    echo " installing Docker done!"
+    start_node
 fi
