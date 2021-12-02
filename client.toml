@@ -1,0 +1,252 @@
+##############################################################################
+#
+#   Nimiq core-rs example configuration file
+#
+#   Copy this to client.toml and edit appropriately.
+#
+#   The client will look for this config file in:
+#    * './' (current directory)
+#    * '$HOME/.config/nimiq'
+#
+##############################################################################
+
+
+
+##############################################################################
+#
+# Network specific configuration
+#
+##############################################################################
+
+[network]
+
+listen_addresses = ["/ip4/0.0.0.0/tcp/8443/ws"]
+
+seed_nodes = [
+        { address = "/dns4/seed1.v2.nimiq-testnet.com/tcp/8443/ws" }
+]
+
+# User Agent
+#
+# String that describes what kind of node is running.
+#
+# Default: Generated from version, operating system and processor architecture
+#user_agent = "core-rs/0.1.0 (native; linux x86_64)"
+
+
+
+##############################################################################
+#
+# Identity file (PCKS#12) and password for private key
+#
+##############################################################################
+#[network.tls]
+#identity_file = "./my.domain.p12"
+#identity_password = "secret"
+
+
+
+##############################################################################
+#
+# Consensus specific configuration
+#
+##############################################################################
+[consensus]
+
+# Specify the network to connect to.
+# Possible values: "main", "test", "dev", "test-albatross", "dev-albatross"
+# Default: "dev-albatross"
+#network = "main"
+
+##############################################################################
+#
+# Database specific configuration
+#
+##############################################################################
+#[database]
+
+# Path to database
+# Default: ~/.nimiq
+#path=""
+
+# Size of mapped memory (in bytes)
+# Default: 10 MB
+#size=0
+
+# Max number of databases
+# Default: 10
+#max_dbs=10
+
+##############################################################################
+#
+# Configure the JSON-RPC server.
+#
+# To enable, uncomment the section header '[rpc-server]'
+#
+#
+#
+##############################################################################
+
+# Uncomment the following line to enable the RPC server.
+[rpc-server]
+
+# Bind the RPC server to specified IP
+# Default: 127.0.0.1
+bind="0.0.0.0"
+
+# TCP-Port to use to create a listening socket for the JSON-RPC server.
+# Possible values: any valid port number
+# Default: 8648
+port = 8648
+
+# Allow only the RPC methods listed here. All methods are allowed if this is empty.
+# Example: ["getBlockByNumber", "peerCount"],
+# Default: []
+methods = []
+
+# Declare a username and password required to access the JSON-RPC server.
+# Default: none
+username = "epicace"
+# Default: none
+password = "f9aWQ62CYVbqGoV8f1o49JbtEM49N9"
+
+
+
+##############################################################################
+#
+# Configure Prometheus-compatible metrics server.
+#
+##############################################################################
+
+# Uncomment the following line to enable the metrics server.
+[metrics-server]
+
+# Bind the RPC server to specified IP
+# Default: 127.0.0.1
+bind="0.0.0.0"
+
+# TCP-Port to use to create a listening socket for the metrics server.
+# Possible values: any valid port number
+# Default: 8649
+port = 8649
+
+# Declare a password required to access the metrics server.
+# Default: none
+#password = "secret"
+
+
+
+##############################################################################
+#
+# Configure support to run this node behind a reverse proxy.
+#
+##############################################################################
+
+# Uncomment the following line to enable reverse proxy support.
+#[reverse-proxy]
+# TCP-Port where the reverse proxy is listening.
+# Possible values: any valid port number
+# Default: 8444
+#port = 8443
+
+# IP address of the reverse proxy that this node will "see".
+# Possible values: any valid IP address
+# Default: "::ffff:127.0.0.1"
+#address = "::ffff:192.168.10.40"
+
+# HTTP header where the reverse proxy will send the original IP address of the connecting client.
+# Possible values: any valid HTTP header name
+# Default: "x-forwarded-for"
+#header = "x-forwarded-for"
+
+# Determines whether the reverse proxy does TLS termination for this node.
+# In that case, we want to advertise our peer address as web socket secure.
+# So if your reverse proxy does the TLS and forwards an unencrypted websocket connection, set
+# this to true and set the network protocol to 'ws'.
+#
+# Default: false
+#with_tls_termination = true
+
+
+
+##############################################################################
+#
+# Configure log output.
+#
+##############################################################################
+
+[log]
+# Configure global log level.
+# Possible values: "trace", "debug", "info", "warn", "error"
+# Default: "info"
+level = "debug"
+
+# Define specific log levels for tags.
+# Default: none
+#tags = { BaseConsensus = "debug" }
+
+# Specify whether timestamps should be included for log statements.
+# Default: true
+#timestamps = false
+
+# Save log output to a file.
+# If not specified, log to stdout.
+# Default: none
+#file = "nimiq-client.log"
+
+# Specify a rotating log file containing a trace log
+# [log.rotating_trace_log]
+
+# Set the path to the folder containing the log files
+# Default: "~/.nimiq/logs"
+# path = none
+
+# Size of each log file
+# Default: 50000000 (50mB)
+# size = 50000000
+
+# Count of additional log files. The total log files count will be file_count + 2.
+# Default: 3
+# file_count = 2
+
+##############################################################################
+##
+## Configure mempool
+##
+###############################################################################
+
+[mempool]
+
+# Configure max size of transaction black list
+# Default: 25000
+#blacklist_limit = 25000
+
+# Rules to filter certain transaction
+#[mempool.filter]
+#tx_fee = 0
+#tx_fee_per_byte = 0
+#tx_value = 0
+#tx_value_total = 0
+#contract_fee = 0
+#contract_fee_per_byte = 0
+#contract_value = 0
+#creation_fee = 0
+#creation_fee_per_byte = 0
+#creation_value = 0
+#sender_balance = 0
+#recipient_balance = 0
+
+##############################################################################
+##
+## Configure validator
+##
+###############################################################################
+
+[validator]
+validator_address = "NQ07 0000 0000 0000 0000 0000 0000 0000 0000"
+signing_key_file = "signing_key.dat"
+voting_key_file = "voting_key.dat"
+fee_key_file = "fee_key.dat"
+#signing_key = "Schnorr Private Key"
+#fee_key = "Schnorr Private Key"
+#voting_key = "BLS Private Key"
