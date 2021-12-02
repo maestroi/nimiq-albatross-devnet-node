@@ -21,8 +21,8 @@ function start_node(){
     echo "Starting node..."
     docker-compose config
     docker-compose -f docker-compose.yml up -d
-    echo "Follow node with: docker-compose logs -f nimiq-node"
-    docker-compose logs -f nimiq-node
+    echo "Follow node with: docker logs -f nimiq-node"
+    docker logs -f nimiq-node
 }
 
 
